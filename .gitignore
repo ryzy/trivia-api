@@ -1,0 +1,41 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+
+# dependencies
+node_modules
+
+# IDEs and editors
+.idea/*
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+
+# Workaround to .css inlining: during tests Karma doesn't inline, so we need compiled .css in src dir
+# We pre-compile them in pre-test task, but we want to ignore all of them.
+# @see 'build:packages:pre' gulp task
+**/src/**/*.css
+
+#System Files
+.DS_Store
+Thumbs.db
