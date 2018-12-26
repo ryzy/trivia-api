@@ -5,8 +5,8 @@ import { of, throwError } from 'rxjs';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { ImageService } from './image.service';
-import { mockUnsplashImage } from '../../test/fixtures/unsplash-image';
-import { mockImage1 } from '../../test/fixtures/image';
+import { mockImage1 } from '../../../../test/fixtures/image';
+import { mockUnsplashImage } from '../../../../test/fixtures/unsplash-image';
 
 const mockHttpError: AxiosError = {
   name: 'Error',
@@ -37,17 +37,15 @@ describe('ImageService', () => {
   describe('getImage', () => {
     it(
       'should get image',
-      marbles(m => {
-        jest
-          .spyOn(http, 'get')
-          .mockReturnValue(of({ data: mockUnsplashImage }));
+      marbles((m) => {
+        jest.spyOn(http, 'get').mockReturnValue(of({ data: mockUnsplashImage }));
         m.expect(service.getImage()).toBeObservable('(v|)', { v: mockImage1 });
       }),
     );
 
     it(
       'should catch error',
-      marbles(m => {
+      marbles((m) => {
         jest.spyOn(http, 'get').mockReturnValue(throwError(mockHttpError));
         m.expect(service.getImage()).toBeObservable('#', undefined, {
           name: 'Error',
@@ -62,13 +60,20 @@ describe('ImageService', () => {
 
   describe('getImages', () => {
     it(
-      'should get images',
-      marbles(m => {
-        const images = [mockImage1];
-        jest
-          .spyOn(http, 'get')
-          .mockReturnValue(of({ data: [mockUnsplashImage] }));
+      'should get images when no query',
+      marbles((m) => {
+        jest.spyOn(http, 'get').mockReturnValue(of({ data: [mockUnsplashImage] }));
         m.expect(service.getImages()).toBeObservable('(v|)', {
+          v: [mockImage1],
+        });
+      }),
+    );
+
+    it(
+      'should get images',
+      marbles((m) => {
+        jest.spyOn(http, 'get').mockReturnValue(of({ data: { results: [mockUnsplashImage] } }));
+        m.expect(service.getImages('some query')).toBeObservable('(v|)', {
           v: [mockImage1],
         });
       }),

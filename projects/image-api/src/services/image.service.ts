@@ -1,9 +1,4 @@
-import {
-  HttpException,
-  HttpService,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpService, HttpStatus, Injectable } from '@nestjs/common';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AxiosRequestConfig, AxiosError } from 'axios';
@@ -18,9 +13,7 @@ const requestConfig: AxiosRequestConfig = {
 };
 
 export function catchUnsplashError(e: AxiosError): Observable<never> {
-  const errors: string[] = (e.response &&
-    e.response.data &&
-    e.response.data.errors) || ['Internal Server Error'];
+  const errors: string[] = (e.response && e.response.data && e.response.data.errors) || ['Internal Server Error'];
 
   throw new HttpException(
     {
@@ -36,23 +29,20 @@ export class ImageService {
   public constructor(private http: HttpService) {}
 
   getImage(imageId: string = 'random'): Observable<Image> {
-    return this.http
-      .get<Image>(`https://api.unsplash.com/photos/${imageId}`, requestConfig)
-      .pipe(
-        map(v => unsplashToImage(v && v.data)),
-        catchError(catchUnsplashError),
-      );
+    return this.http.get<Image>(`https://api.unsplash.com/photos/${imageId}`, requestConfig).pipe(
+      map((v) => unsplashToImage(v && v.data)),
+      catchError(catchUnsplashError),
+    );
   }
 
   getImages(query?: string): Observable<Image[]> {
     // Support empty query, then simply call to the list of recent photos
-    const url =
-      `https://api.unsplash.com` + (query ? `/search/photos` : `/photos`);
+    const url = `https://api.unsplash.com` + (query ? `/search/photos` : `/photos`);
 
     return this.http.get(url, { ...requestConfig, params: { query } }).pipe(
       // When making request to url with query, the response is slightly different...
-      map(v => (v.data && (query ? v.data.results : v.data)) || []),
-      map((images: any[]) => images.map(v => unsplashToImage(v))),
+      map((v) => (v.data && v.data.results) || v.data || []),
+      map((images: any[]) => images.map((v) => unsplashToImage(v))),
       catchError(catchUnsplashError),
     );
   }

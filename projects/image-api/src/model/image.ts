@@ -35,8 +35,7 @@ export function unsplashToImage(data: any = {}): Image {
       source: 'Unsplash',
       name: data.user && data.user.name,
       url: data.user && data.user.links && data.user.links.html,
-      avatar:
-        data.user && data.user.profile_image && data.user.profile_image.large,
+      avatar: data.user && data.user.profile_image && data.user.profile_image.large,
       twitter: data.user && data.user.twitter_username,
     },
   };

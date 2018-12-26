@@ -1,0 +1,132 @@
+version: 2
+
+.job-defaults: &job-defaults
+  docker:
+    - image: circleci/node:10.9-stretch-browsers
+
+.store-cache-npm-deps: &store-cache-npm-deps
+  save_cache:
+    key: npm-deps-{{ checksum "yarn.lock" }}
+    paths: [ node_modules, ~/.cache/Cypress/ ]
+
+.restore-cache-npm-deps: &restore-cache-npm-deps
+  restore_cache:
+    key: npm-deps-{{ checksum "yarn.lock" }}
+
+.attach-workspace: &attach-workspace
+  attach_workspace:
+    at: .
+
+.run-install: &run-install
+  run:
+    name: Installing
+    command: yarn install --frozen-lockfile
+
+jobs:
+  install:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - *store-cache-npm-deps
+
+  api:build:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run:
+          name: Build
+          command: |
+            yarn api:build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/api/*
+      - store_artifacts: { path: dist/api, destination: dist/api }
+
+  api:tests:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn api:test:ci
+      - store_test_results:
+          path: dist/api/coverage/
+
+  api:e2e:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn api:e2e
+
+  linting:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn lint
+
+#  deploy:
+#    <<: *job-defaults
+#    steps:
+#      - checkout
+#      - *restore-cache-npm-deps
+#      - *attach-workspace
+#      - *run-install
+#      - run:
+#          name: Deploy STAGE
+#          command: |
+#            yarn deploy
+#            # Send deploy message to #frontend-events-dev Slack channel
+#            curl -X POST --data-urlencode "payload={\"channel\": \"#frontend-events-dev\", \"username\": \"CI Deployments\", \"text\": \"*STAGE https://stage.what-conference-next.com/ deployed with success* :green_heart:\", \"icon_emoji\": \":rocket:\"}" https://hooks.slack.com/services/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
+#
+#  deploy-prod:
+#    <<: *job-defaults
+#    steps:
+#      - checkout
+#      - *restore-cache-npm-deps
+#      - *attach-workspace
+#      - *run-install
+#      - run:
+#          name: Deploy PROD
+#          command: |
+#            yarn deploy:prod
+#            # Send deploy message to #frontend-events-dev Slack channel
+#            curl -X POST --data-urlencode "payload={\"channel\": \"#frontend-events-dev\", \"username\": \"CI Deployments\", \"text\": \"*LIVE https://what-conference-next.com deployed with success* :green_heart:\", \"icon_emoji\": \":bomb:\"}" https://hooks.slack.com/services/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
+
+
+#
+# Workflow setup
+#
+workflows:
+  version: 2
+  build test deploy:
+    jobs:
+      - install
+      - api:build:
+          requires: [ install ]
+      - api:tests:
+          requires: [ install ]
+      - api:e2e:
+          requires: [ install ]
+      - linting:
+          requires: [ install ]
+
+#      - deploy:
+#          requires: [ audit-checks, e2e-tests ]
+#          filters:
+#            branches:
+#              only: master
+#
+#      - deploy-prod:
+#          requires: [ audit-checks ]
+#          filters:
+#            branches:
+#              only: prod
