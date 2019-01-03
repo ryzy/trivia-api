@@ -1,1 +1,11 @@
-app.component.html
+<mat-card>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let query of queries" (click)="onNewQuery(query)">
+        {{ query }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<ngx-image-api [query]="currentQuery"></ngx-image-api>

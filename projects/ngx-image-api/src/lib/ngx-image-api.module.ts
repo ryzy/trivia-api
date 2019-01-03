@@ -1,9 +1,19 @@
-import { NgModule } from '@angular/core';
-import { NgxImageApiComponent } from './ngx-image-api.component';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+
+import { ImageApiView } from './components/ngx-image-api/image-api.view';
+import { NGX_IMAGE_API_MODULE_CONFIG, NgxImageApiModuleConfig } from './di';
 
 @NgModule({
-  declarations: [NgxImageApiComponent],
+  declarations: [ImageApiView],
   imports: [],
-  exports: [NgxImageApiComponent],
+  exports: [ImageApiView],
 })
-export class NgxImageApiModule {}
+export class NgxImageApiModule {
+
+  public static forRoot(config: NgxImageApiModuleConfig): ModuleWithProviders {
+    return {
+      ngModule: NgxImageApiModule,
+      providers: [{ provide: NGX_IMAGE_API_MODULE_CONFIG, useValue: config }],
+    };
+  }
+}

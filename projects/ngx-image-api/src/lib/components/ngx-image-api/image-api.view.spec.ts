@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxImageApiComponent } from './ngx-image-api.component';
+import { ImageApiView } from './image-api.view';
 
-describe('NgxImageApiComponent', () => {
-  let component: NgxImageApiComponent;
-  let fixture: ComponentFixture<NgxImageApiComponent>;
+describe('ImageApiView', () => {
+  let component: ImageApiView;
+  let fixture: ComponentFixture<ImageApiView>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NgxImageApiComponent],
+      declarations: [ImageApiView],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxImageApiComponent);
+    fixture = TestBed.createComponent(ImageApiView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
