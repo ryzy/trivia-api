@@ -2,7 +2,7 @@ version: 2
 
 .job-defaults: &job-defaults
   docker:
-    - image: circleci/node:10.9-stretch-browsers
+    - image: circleci/node:10.15
 
 .store-cache-npm-deps: &store-cache-npm-deps
   save_cache:
@@ -73,6 +73,42 @@ jobs:
       - *run-install
       - run: yarn lint
 
+  modules:build:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn modules:build
+      - store_test_results:
+          path: dist/api/coverage/
+  modules:tests:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn modules:test:ci
+      - store_test_results:
+          path: dist/api/coverage/
+
+  demo-app:build:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn build
+  demo-app:tests:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *run-install
+      - run: yarn test:ci
+      - store_test_results:
+          path: dist/api/coverage/
+
 #  deploy:
 #    <<: *job-defaults
 #    steps:
@@ -118,6 +154,14 @@ workflows:
           requires: [ install ]
       - linting:
           requires: [ install ]
+      - modules:build:
+          requires: [ install ]
+      - modules:tests:
+          requires: [ install ]
+      - demo-app:build:
+          requires: [ modules:build ]
+      - demo-app:tests:
+          requires: [ modules:build ]
 
 #      - deploy:
 #          requires: [ audit-checks, e2e-tests ]

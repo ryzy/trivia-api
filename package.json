@@ -15,7 +15,14 @@
     "api:test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "api:test:ci": "jest --config ./projects/image-api/jest.config.js --coverage",
     "lint": "prettier --config .prettierrc.json --list-different '{projects,tests}/**/*.{js,json,scss,ts}' && echo 'prettier OK, doing ng lint...' && ng lint",
-    "lint-fix": "prettier --config .prettierrc.json --write '{projects,tests}/**/*.{js,json,scss,ts}'; ng lint"
+    "lint-fix": "prettier --config .prettierrc.json --write '{projects,tests}/**/*.{js,json,scss,ts}'; ng lint",
+    "start": "ng serve demo-app",
+    "build": "ng build -c production demo-app",
+    "test": "ng test --watch --project demo-app",
+    "test:ci": "ng test --coverage --project demo-app",
+    "modules:build": "ng build --project ngx-image-api",
+    "modules:test": "ng test --watch --project ngx-image-api",
+    "modules:test:ci": "ng test --coverage --project ngx-image-api"
   },
   "dependencies": {
     "@angular/animations": "7.1.4",

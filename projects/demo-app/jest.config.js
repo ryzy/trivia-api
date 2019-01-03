@@ -16,6 +16,7 @@ module.exports = {
   collectCoverageFrom: ['projects/demo-app/src/**/*.ts'],
   coverageReporters: ['text', 'lcov', 'html'],
   coverageDirectory: 'dist/coverage/demo-app',
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/main.ts', '/environments/'],
 
   /**
    * Respect package.json `browser` field.

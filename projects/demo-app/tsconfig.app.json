@@ -10,7 +10,6 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true,
     "disableTypeScriptVersionCheck": true
   },
   "exclude": ["test.ts", "**/*.spec.ts"]

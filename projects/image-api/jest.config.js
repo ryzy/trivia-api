@@ -24,7 +24,7 @@ module.exports = {
   collectCoverageFrom: ['**/*.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', 'main.ts'],
   coverageReporters: ['text', 'lcov', 'html'],
-  coverageDirectory: 'dist/coverage/api',
+  coverageDirectory: '../../dist/coverage/api',
 
   /**
    * Provide our mocks, apart of what jest-preset-angular and /@angular-builders/jest provides

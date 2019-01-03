@@ -16,6 +16,7 @@ module.exports = {
   collectCoverageFrom: ['projects/ngx-image-api/src/**/*.ts'],
   coverageReporters: ['text', 'lcov', 'html'],
   coverageDirectory: 'dist/coverage/ngx-image-api',
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/public_api.ts'],
 
   /**
    * Respect package.json `browser` field.
