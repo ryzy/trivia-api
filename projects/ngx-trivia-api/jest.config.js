@@ -13,9 +13,9 @@ module.exports = {
       lines: 90,
     },
   },
-  collectCoverageFrom: ['projects/ngx-image-api/src/**/*.ts'],
+  collectCoverageFrom: ['projects/ngx-trivia-api/src/**/*.ts'],
   coverageReporters: ['text', 'lcov', 'html'],
-  coverageDirectory: 'dist/coverage/ngx-image-api',
+  coverageDirectory: 'dist/coverage/ngx-trivia-api',
   coveragePathIgnorePatterns: ['/node_modules/', '/src/public_api.ts'],
 
   /**

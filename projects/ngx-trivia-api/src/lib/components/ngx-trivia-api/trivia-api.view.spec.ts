@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageApiView } from './image-api.view';
+import { TriviaApiView } from './trivia-api-view.component';
 
-describe('ImageApiView', () => {
-  let component: ImageApiView;
-  let fixture: ComponentFixture<ImageApiView>;
+describe('TriviaApiView', () => {
+  let component: TriviaApiView;
+  let fixture: ComponentFixture<TriviaApiView>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ImageApiView],
+      declarations: [TriviaApiView],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageApiView);
+    fixture = TestBed.createComponent(TriviaApiView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

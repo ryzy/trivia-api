@@ -1,0 +1,6 @@
+{
+  "watch": ["projects/trivia-api/src"],
+  "ext": "ts",
+  "ignore": ["projects/trivia-api/src/**/*.spec.ts"],
+  "exec": "ts-node --project projects/trivia-api/tsconfig.json -r tsconfig-paths/register projects/trivia-api/src/main.ts"
+}

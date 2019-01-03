@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { AppModule } from '../projects/image-api/src/app.module';
+import { AppModule } from '../projects/trivia-api/src/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

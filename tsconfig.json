@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ngx-image-api": [
-        "dist/ngx-image-api"
+      "ngx-trivia-api": [
+        "dist/ngx-trivia-api"
       ],
-      "ngx-image-api/*": [
-        "dist/ngx-image-api/*"
+      "ngx-trivia-api/*": [
+        "dist/ngx-trivia-api/*"
       ]
     }
   }

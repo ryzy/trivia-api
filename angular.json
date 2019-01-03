@@ -90,17 +90,17 @@
         }
       }
     },
-    "ngx-image-api": {
-      "root": "projects/ngx-image-api",
-      "sourceRoot": "projects/ngx-image-api/src",
+    "ngx-trivia-api": {
+      "root": "projects/ngx-trivia-api",
+      "sourceRoot": "projects/ngx-trivia-api/src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-image-api/tsconfig.lib.json",
-            "project": "projects/ngx-image-api/ng-package.json"
+            "tsConfig": "projects/ngx-trivia-api/tsconfig.lib.json",
+            "project": "projects/ngx-trivia-api/ng-package.json"
           }
         },
         "test": {
@@ -113,8 +113,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-image-api/tsconfig.lib.json",
-              "projects/ngx-image-api/tsconfig.spec.json"
+              "projects/ngx-trivia-api/tsconfig.lib.json",
+              "projects/ngx-trivia-api/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -123,9 +123,9 @@
         }
       }
     },
-    "image-api": {
-      "root": "projects/image-api",
-      "sourceRoot": "projects/image-api/src",
+    "trivia-api": {
+      "root": "projects/trivia-api",
+      "sourceRoot": "projects/trivia-api/src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
@@ -133,8 +133,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/image-api/tsconfig.json",
-              "projects/image-api/tsconfig.spec.json"
+              "projects/trivia-api/tsconfig.json",
+              "projects/trivia-api/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

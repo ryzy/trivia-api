@@ -1,5 +1,5 @@
 /* tslint:disable:max-line-length */
-import { Image } from '../../projects/image-api/src/model/image';
+import { Image } from '../../projects/trivia-api/src/model/image';
 
 export const mockImage1: Image = {
   id: 'mock-image-1',

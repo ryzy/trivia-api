@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgxImageApiService } from './ngx-image-api.service';
+import { TriviaApiService } from './trivia-api.service';
 
-describe('NgxImageApiService', () => {
+describe('TriviaApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: NgxImageApiService = TestBed.get(NgxImageApiService);
+    const service: TriviaApiService = TestBed.get(TriviaApiService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-# Simple Image API
+# Simple Trivia API
 
 API:
 ```
@@ -14,7 +14,7 @@ Start the API:
 yarn api:start:dev
 ```
 
-Start the demo app and watch for changes in `ngx-image-api` npm module:
+Start the demo app and watch for changes in `ngx-trivia-api` npm module:
 ```
 yarn start
 yarn modules:build --watch

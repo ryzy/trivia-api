@@ -1,6 +1,0 @@
-{
-  "watch": ["projects/image-api/src"],
-  "ext": "ts",
-  "ignore": ["projects/image-api/src/**/*.spec.ts"],
-  "exec": "ts-node --project projects/image-api/tsconfig.json -r tsconfig-paths/register projects/image-api/src/main.ts"
-}
