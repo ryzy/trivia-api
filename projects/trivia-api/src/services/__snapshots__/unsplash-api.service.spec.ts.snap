@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image model #unsplashToImage 1`] = `
+exports[`UnsplashApiService #unsplashToImage 1`] = `
 Object {
   "author": Object {
     "avatar": undefined,

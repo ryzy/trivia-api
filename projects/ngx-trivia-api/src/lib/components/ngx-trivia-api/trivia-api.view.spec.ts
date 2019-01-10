@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TriviaApiView } from './trivia-api-view.component';
+import { TriviaApiView } from './trivia-api.view';
 
 describe('TriviaApiView', () => {
   let component: TriviaApiView;

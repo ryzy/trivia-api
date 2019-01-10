@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TriviaApiService } from './trivia-api.service';
+import { TriviaDataService } from './trivia-data.service';
 
-describe('TriviaApiService', () => {
+describe('TriviaDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TriviaApiService = TestBed.get(TriviaApiService);
+    const service: TriviaDataService = TestBed.get(TriviaDataService);
     expect(service).toBeTruthy();
   });
 });

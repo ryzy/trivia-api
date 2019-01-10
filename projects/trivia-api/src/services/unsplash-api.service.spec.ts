@@ -4,7 +4,7 @@ import { marbles } from 'rxjs-marbles';
 import { of, throwError } from 'rxjs';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { ImageService } from './image.service';
+import { UnsplashApiService, unsplashToImage } from './unsplash-api.service';
 import { mockImage1 } from '../../../../test/fixtures/image';
 import { mockUnsplashImage } from '../../../../test/fixtures/unsplash-image';
 
@@ -19,19 +19,24 @@ const mockHttpError: AxiosError = {
   } as AxiosResponse,
 };
 
-describe('ImageService', () => {
+describe('UnsplashApiService', () => {
   let app: TestingModule;
   let http: HttpService;
-  let service: ImageService;
+  let service: UnsplashApiService;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
       imports: [HttpModule],
-      providers: [ImageService],
+      providers: [UnsplashApiService],
     }).compile();
 
     http = app.get<HttpService>(HttpService);
-    service = app.get<ImageService>(ImageService);
+    service = app.get<UnsplashApiService>(UnsplashApiService);
+  });
+
+  test('#unsplashToImage', () => {
+    expect(unsplashToImage()).toMatchSnapshot();
+    expect(unsplashToImage(mockUnsplashImage)).toEqual(mockImage1);
   });
 
   describe('getImage', () => {

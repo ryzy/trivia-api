@@ -1,3 +1,6 @@
-trivia-api view html
 
-<pre>query: {{query}}</pre>
+<mat-form-field appearance="outline">
+  <mat-label>Query</mat-label>
+  <input matInput placeholder="Query" [value]="query">
+  <mat-hint>Search for images of definition...</mat-hint>
+</mat-form-field>

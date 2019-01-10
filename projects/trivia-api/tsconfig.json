@@ -1,18 +1,11 @@
 {
-  "compileOnSave": false,
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "target": "es6",
-    "sourceMap": true,
     "strict": true,
     "allowJs": true,
-    "skipLibCheck": true,
-    "outDir": "../../dist/api",
-    "baseUrl": "./"
+    "outDir": "../../dist/api"
   },
-  "lib": ["es2015", "es2018", "dom"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

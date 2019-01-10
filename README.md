@@ -2,9 +2,9 @@
 
 API:
 ```
-GET /image/:id
-GET /images
-GET /images/:query
+GET /unsplash/images
+GET /unsplash/images?q=SEARCH_QUERY
+GET /explain?q=SEARCH_QUERY
 ```
 
 ## Development

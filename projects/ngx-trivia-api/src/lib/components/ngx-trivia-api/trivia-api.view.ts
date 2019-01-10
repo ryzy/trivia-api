@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TriviaDataService } from '../../services/trivia-data.service';
 
 @Component({
   selector: 'ngx-trivia-api',
@@ -9,7 +10,7 @@ export class TriviaApiView implements OnInit {
   @Input()
   public query: string;
 
-  // public constructor(service: )
+  public constructor(protected service: TriviaDataService) {}
 
   public ngOnInit(): void {
     console.log('TriviaApiView', this);
