@@ -42,4 +42,11 @@ describe('Trivia API - E2E', () => {
       .expect(200)
       .expect([]);
   });
+
+  test('GET Google images: query', () => {
+    return request(app.getHttpServer())
+      .get('/google/images?q=beauty')
+      .expect(200)
+      .expect(/"Google"/); // expect some images with "Google" source
+  });
 });

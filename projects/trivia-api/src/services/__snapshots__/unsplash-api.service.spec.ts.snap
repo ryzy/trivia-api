@@ -5,15 +5,20 @@ Object {
   "author": Object {
     "avatar": undefined,
     "name": undefined,
-    "source": "Unsplash",
     "twitter": undefined,
     "url": undefined,
   },
   "caption": undefined,
   "id": undefined,
+  "license": "cc_attribute",
   "links": Object {
     "html": undefined,
+    "large": undefined,
+    "regular": undefined,
+    "small": undefined,
+    "thumb": undefined,
   },
   "location": undefined,
+  "source": "Unsplash",
 }
 `;

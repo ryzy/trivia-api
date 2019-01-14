@@ -1,5 +1,5 @@
 import { HttpException, HttpService, HttpStatus, Injectable } from '@nestjs/common';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AxiosRequestConfig, AxiosError } from 'axios';
 import { Image } from 'ngx-trivia-api';
@@ -17,12 +17,16 @@ export function unsplashToImage(data: any = {}): Image {
     id: data.id,
     caption: data.description,
     location: data.location && data.location.title,
+    license: 'cc_attribute',
+    source: 'Unsplash',
     links: {
       html: data.links && data.links.html,
-      ...data.urls,
+      large: data.urls && data.urls.full,
+      regular: data.urls && data.urls.regular,
+      small: data.urls && data.urls.small,
+      thumb: data.urls && data.urls.thumb,
     },
     author: {
-      source: 'Unsplash',
       name: data.user && data.user.name,
       url: data.user && data.user.links && data.user.links.html,
       avatar: data.user && data.user.profile_image && data.user.profile_image.large,

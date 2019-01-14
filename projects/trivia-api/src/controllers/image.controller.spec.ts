@@ -2,34 +2,37 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { HttpModule } from '@nestjs/common';
 import { of } from 'rxjs';
 import { marbles } from 'rxjs-marbles';
+import { GoogleApiService } from '../services/google-api.service';
 
 import { UnsplashApiService } from '../services/unsplash-api.service';
 import { ImageController } from './image.controller';
-import { mockImage1, mockImage2 } from '../../../../test/fixtures/image';
+import { mockImage1, mockImage2, mockImage3 } from '../../../../test/fixtures/image';
 
 describe('ImageController', () => {
   let app: TestingModule;
   let controller: ImageController;
-  let service: UnsplashApiService;
+  let unsplashApi: UnsplashApiService;
+  let googleApi: GoogleApiService;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
       imports: [HttpModule],
       controllers: [ImageController],
-      providers: [UnsplashApiService],
+      providers: [UnsplashApiService, GoogleApiService],
     }).compile();
 
     controller = app.get<ImageController>(ImageController);
-    service = app.get<UnsplashApiService>(UnsplashApiService);
+    unsplashApi = app.get<UnsplashApiService>(UnsplashApiService);
+    googleApi = app.get<GoogleApiService>(GoogleApiService);
   });
 
-  describe('getImages', () => {
+  describe('getUnsplashImages', () => {
     it(
       'should get latest images when no query params',
       marbles((m) => {
         const images = [mockImage1, mockImage2];
-        jest.spyOn(service, 'getImages').mockReturnValue(of(images));
-        m.expect(controller.getImages({})).toBeObservable('(v|)', { v: images });
+        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(images));
+        m.expect(controller.getUnsplashImages({})).toBeObservable('(v|)', { v: images });
       }),
     );
 
@@ -37,8 +40,19 @@ describe('ImageController', () => {
       'should search images',
       marbles((m) => {
         const images = [mockImage1, mockImage2];
-        jest.spyOn(service, 'getImages').mockReturnValue(of(images));
-        m.expect(controller.getImages({ q: 'foo' })).toBeObservable('(v|)', { v: images });
+        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(images));
+        m.expect(controller.getUnsplashImages({ q: 'foo' })).toBeObservable('(v|)', { v: images });
+      }),
+    );
+  });
+
+  describe('getGoogleImages', () => {
+    it(
+      'should search images',
+      marbles((m) => {
+        const images = [mockImage3];
+        jest.spyOn(googleApi, 'getImages').mockReturnValue(of(images));
+        m.expect(controller.getGoogleImages({ q: 'foo' })).toBeObservable('(v|)', { v: images });
       }),
     );
   });

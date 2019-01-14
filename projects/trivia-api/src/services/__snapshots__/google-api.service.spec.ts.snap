@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleApiService #googleResultToImage 1`] = `
+Object {
+  "caption": undefined,
+  "id": "google-image-1",
+  "license": "cc_publicdomain",
+  "links": Object {
+    "html": undefined,
+    "large": undefined,
+    "regular": undefined,
+    "small": undefined,
+    "thumb": undefined,
+  },
+  "source": "Google",
+}
+`;
