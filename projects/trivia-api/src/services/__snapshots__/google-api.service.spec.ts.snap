@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GoogleApiService #googleResultToExplanation 1`] = `
+Object {
+  "description": undefined,
+  "id": undefined,
+  "license": undefined,
+  "name": undefined,
+  "source": "Google",
+  "type": Array [],
+  "url": undefined,
+}
+`;
+
 exports[`GoogleApiService #googleResultToImage 1`] = `
 Object {
   "caption": undefined,

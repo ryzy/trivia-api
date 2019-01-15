@@ -40,7 +40,14 @@ describe('Trivia API - E2E', () => {
     return request(app.getHttpServer())
       .get('/unsplash/images?q=someinvalidquerynosuchimage')
       .expect(200)
-      .expect([]);
+      .expect({
+        pageInfo: {
+          totalCount: 0,
+          page: 1,
+          pageSize: 10,
+        },
+        items: []
+      });
   });
 
   test('GET Google images: query', () => {

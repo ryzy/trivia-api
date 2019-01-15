@@ -5625,6 +5625,13 @@ ng-packagr@4.4.5:
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
 
+ngx-trivia-api@latest:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-trivia-api/-/ngx-trivia-api-0.0.1.tgz#e22debbde5827638a0147179dcd0c08c95acaeb3"
+  integrity sha512-J9/GjBO211bsRxPqpLPqfkvr2HrvRwSaeMzMgjTXBRQgrOqw9sf10AtzWhkgrw1cIhRA5EX4Y8KB5J0kjZhzCw==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

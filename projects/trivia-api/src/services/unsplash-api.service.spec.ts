@@ -3,6 +3,7 @@ import { HttpModule, HttpService } from '@nestjs/common';
 import { marbles } from 'rxjs-marbles';
 import { of, throwError } from 'rxjs';
 import { AxiosError, AxiosResponse } from 'axios';
+import { makePagedResult } from 'ngx-trivia-api';
 
 import { UnsplashApiService, unsplashToImage } from './unsplash-api.service';
 import { mockImage1 } from '../../../../test/fixtures/image';
@@ -68,8 +69,8 @@ describe('UnsplashApiService', () => {
       'should get images when no query',
       marbles((m) => {
         jest.spyOn(http, 'get').mockReturnValue(of({ data: [mockUnsplashImage] }));
-        m.expect(service.getImages()).toBeObservable('(v|)', {
-          v: [mockImage1],
+        m.expect(service.getImages({})).toBeObservable('(v|)', {
+          v: makePagedResult([mockImage1], 1),
         });
       }),
     );
@@ -78,8 +79,8 @@ describe('UnsplashApiService', () => {
       'should get images',
       marbles((m) => {
         jest.spyOn(http, 'get').mockReturnValue(of({ data: { results: [mockUnsplashImage] } }));
-        m.expect(service.getImages('some query')).toBeObservable('(v|)', {
-          v: [mockImage1],
+        m.expect(service.getImages({ query: 'some query' })).toBeObservable('(v|)', {
+          v: makePagedResult([mockImage1], 1),
         });
       }),
     );

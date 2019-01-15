@@ -2,7 +2,7 @@
 
 API:
 ```
-GET /unsplash/images
+GET /google/images?q=SEARCH_QUERY
 GET /unsplash/images?q=SEARCH_QUERY
 GET /explain?q=SEARCH_QUERY
 ```
