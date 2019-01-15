@@ -8,7 +8,7 @@ import { TriviaDataService } from '../../services/trivia-data.service';
 })
 export class TriviaApiView implements OnInit {
   @Input()
-  public query: string;
+  public query: string = '';
 
   public constructor(protected service: TriviaDataService) {}
 

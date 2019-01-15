@@ -22,7 +22,7 @@ module.exports = {
     },
   },
   collectCoverageFrom: ['**/*.ts'],
-  coveragePathIgnorePatterns: ['/node_modules/', 'main.ts'],
+  coveragePathIgnorePatterns: ['/node_modules/', 'main.ts', 'environment/*.ts'],
   coverageReporters: ['text', 'lcov', 'html'],
   coverageDirectory: '../../dist/coverage/api',
 

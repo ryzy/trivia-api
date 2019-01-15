@@ -1,9 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpModule, HttpService } from '@nestjs/common';
+import { makePagedResult } from 'ngx-trivia-api';
 import { marbles } from 'rxjs-marbles';
 import { of, throwError } from 'rxjs';
 
-import { GoogleApiService, googleResultToImage } from './google-api.service';
+import { GoogleApiService, googleResultToExplanation, googleResultToImage } from './google-api.service';
+import { mockExplanation1, mockExplanations, mockGoogleKnowledgeResponse } from '../../../../test/fixtures/explanation';
+import { Explanation } from '../../../ngx-trivia-api/src/lib/model/explanation';
 import { mockGoogleImageRes } from '../../../../test/fixtures/google-image';
 import { mockImage3 } from '../../../../test/fixtures/image';
 
@@ -27,13 +30,18 @@ describe('GoogleApiService', () => {
     expect(googleResultToImage(mockGoogleImageRes, 0)).toEqual(mockImage3);
   });
 
+  test('#googleResultToExplanation', () => {
+    expect(googleResultToExplanation()).toMatchSnapshot();
+    expect(googleResultToExplanation(mockGoogleKnowledgeResponse.itemListElement[0])).toEqual(mockExplanation1);
+  });
+
   describe('getImages', () => {
     it(
       'should get images',
       marbles((m) => {
         jest.spyOn(http, 'get').mockReturnValue(of({ data: { items: [mockGoogleImageRes] } }));
         m.expect(service.getImages({ q: 'some query' })).toBeObservable('(v|)', {
-          v: [mockImage3],
+          v: makePagedResult([mockImage3], 0, 1),
         });
       }),
     );
@@ -52,5 +60,21 @@ describe('GoogleApiService', () => {
         });
       }),
     );
+  });
+
+  describe('getExplanations', () => {
+    let res: Explanation[] | undefined;
+
+    it('should get explanations', () => {
+      jest.spyOn(http, 'get').mockReturnValue(of({ data: mockGoogleKnowledgeResponse }));
+      service.getExplanations({}).subscribe((v) => (res = v));
+      expect(res).toEqual(mockExplanations);
+    });
+
+    it('should get explanation - empty response', () => {
+      jest.spyOn(http, 'get').mockReturnValue(of({ data: {} }));
+      service.getExplanations({}).subscribe((v) => (res = v));
+      expect(res).toEqual([]);
+    });
   });
 });

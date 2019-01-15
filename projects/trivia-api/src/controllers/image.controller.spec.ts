@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HttpModule } from '@nestjs/common';
+import { makePagedResult } from 'ngx-trivia-api';
 import { of } from 'rxjs';
 import { marbles } from 'rxjs-marbles';
-import { GoogleApiService } from '../services/google-api.service';
 
+import { GoogleApiService } from '../services/google-api.service';
 import { UnsplashApiService } from '../services/unsplash-api.service';
 import { ImageController } from './image.controller';
 import { mockImage1, mockImage2, mockImage3 } from '../../../../test/fixtures/image';
@@ -31,8 +32,8 @@ describe('ImageController', () => {
       'should get latest images when no query params',
       marbles((m) => {
         const images = [mockImage1, mockImage2];
-        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(images));
-        m.expect(controller.getUnsplashImages({})).toBeObservable('(v|)', { v: images });
+        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(makePagedResult(images)));
+        m.expect(controller.getUnsplashImages({})).toBeObservable('(v|)', { v: makePagedResult(images) });
       }),
     );
 
@@ -40,8 +41,8 @@ describe('ImageController', () => {
       'should search images',
       marbles((m) => {
         const images = [mockImage1, mockImage2];
-        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(images));
-        m.expect(controller.getUnsplashImages({ q: 'foo' })).toBeObservable('(v|)', { v: images });
+        jest.spyOn(unsplashApi, 'getImages').mockReturnValue(of(makePagedResult(images)));
+        m.expect(controller.getUnsplashImages({ q: 'foo' })).toBeObservable('(v|)', { v: makePagedResult(images) });
       }),
     );
   });
@@ -51,8 +52,8 @@ describe('ImageController', () => {
       'should search images',
       marbles((m) => {
         const images = [mockImage3];
-        jest.spyOn(googleApi, 'getImages').mockReturnValue(of(images));
-        m.expect(controller.getGoogleImages({ q: 'foo' })).toBeObservable('(v|)', { v: images });
+        jest.spyOn(googleApi, 'getImages').mockReturnValue(of(makePagedResult(images)));
+        m.expect(controller.getGoogleImages({ q: 'foo' })).toBeObservable('(v|)', { v: makePagedResult(images) });
       }),
     );
   });
