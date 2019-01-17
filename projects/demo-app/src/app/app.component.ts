@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public queries: string[] = ['pretty', 'jaguar', 'beauty', 'fashion', 'sexy', 'food', 'forest'];
+  public queries: string[] = ['pretty', 'jaguar', 'beauty', 'fashion', 'food', 'forest'];
 
   public currentQuery: string;
 

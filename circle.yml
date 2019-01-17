@@ -89,8 +89,8 @@ jobs:
       - *restore-cache-npm-deps
       - *run-install
       - run: yarn modules:test:ci
-      - store_test_results:
-          path: dist/api/coverage/
+#      - store_test_results:
+#          path: dist/api/coverage/
 
   demo-app:build:
     <<: *job-defaults
@@ -106,8 +106,8 @@ jobs:
       - *restore-cache-npm-deps
       - *run-install
       - run: yarn test:ci
-      - store_test_results:
-          path: dist/api/coverage/
+#      - store_test_results:
+#          path: dist/api/coverage/
 
 #  deploy:
 #    <<: *job-defaults

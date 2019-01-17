@@ -12,7 +12,5 @@ export class TriviaApiView implements OnInit {
 
   public constructor(protected service: TriviaDataService) {}
 
-  public ngOnInit(): void {
-    console.log('TriviaApiView', this);
-  }
+  public ngOnInit(): void {}
 }
