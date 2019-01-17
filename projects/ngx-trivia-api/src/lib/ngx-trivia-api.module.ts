@@ -6,8 +6,8 @@ import { TriviaApiView } from './components/ngx-trivia-api/trivia-api.view';
 import { NGX_TRIVIA_API_MODULE_CONFIG, NgxTriviaApiModuleConfig } from './di';
 
 @NgModule({
-  declarations: [TriviaApiView],
   imports: [HttpClientModule, MatFormFieldModule, MatInputModule],
+  declarations: [TriviaApiView],
   exports: [TriviaApiView],
 })
 export class NgxTriviaApiModule {
