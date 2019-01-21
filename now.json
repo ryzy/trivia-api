@@ -1,0 +1,16 @@
+{
+  "name": "trivia-api",
+  "version": 2,
+  "public": true,
+  "builds": [
+    { "src": "dist/api/trivia-api/src/main.js", "use": "@now/node" },
+    { "src": "dist/demo-app/**/*", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/api/.*", "dest": "dist/api/src/main.js" },
+    { "src": "/(.*)", "dest": "dist/demo-app/$1", "headers": {"cache-control": "s-maxage=60"} }
+  ],
+  "github": {
+    "enabled": true
+  }
+}

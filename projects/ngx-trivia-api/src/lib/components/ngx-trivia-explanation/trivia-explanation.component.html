@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title>{{explanation.name}}</mat-card-title>
+  <mat-card-content (click)="clicked()">
+    <blockquote><p>{{explanation.description}}</p></blockquote>
+  </mat-card-content>
+  <mat-card-footer>
+    <span class="source">
+      <a href="{{explanation.license}}">License</a>.
+      Source: <a href="{{explanation.url}}" target="_blank">{{explanation.source}}</a>
+    </span>
+    <span class="types">{{explanation.type.join(', ')}}</span>
+  </mat-card-footer>
+  <div class="select-overlay"></div>
+</mat-card>

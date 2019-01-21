@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { NgxTriviaApiModule } from 'ngx-trivia-api';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
     NgxTriviaApiModule.forRoot({
-      apiUrl: 'http://localhost:3000',
+      apiUrl: environment.triviaApiUrl,
     }),
   ],
   exports: [],

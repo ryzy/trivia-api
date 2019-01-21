@@ -1,3 +1,43 @@
 :host {
   position: relative;
 }
+
+ngx-trivia-image + ngx-trivia-image {
+  margin-top: 1rem;
+}
+ngx-trivia-explanation + ngx-trivia-explanation {
+  margin-top: 1rem;
+}
+
+ngx-trivia-image,
+ngx-trivia-explanation {
+  ::ng-deep {
+    .mat-card-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem 1rem;
+    }
+  }
+
+  ::ng-deep {
+    .mat-card-content {
+      position: relative;
+    }
+    .mat-card-content:hover:after {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      content: 'done';
+      font-family: 'Material Icons';
+      font-size: 5rem;
+      color: rgba(0, 255, 0, 0.6);
+      background-color: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+  }
+}

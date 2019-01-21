@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  triviaApiUrl: 'http://localhost:3000',
 };
 
 /*

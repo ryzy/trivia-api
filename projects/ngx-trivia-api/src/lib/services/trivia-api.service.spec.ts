@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { NgxTriviaApiTestingModule } from '../../testing/ngx-trivia-api-testing.module';
 
-import { TriviaDataService } from './trivia-data.service';
+import { TriviaApiService } from './trivia-api.service';
 
-describe('TriviaDataService', () => {
+describe('TriviaApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxTriviaApiTestingModule],
@@ -11,7 +11,7 @@ describe('TriviaDataService', () => {
   });
 
   it('should be created', () => {
-    const service: TriviaDataService = TestBed.get(TriviaDataService);
+    const service: TriviaApiService = TestBed.get(TriviaApiService);
     expect(service).toBeTruthy();
   });
 });
