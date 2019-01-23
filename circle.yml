@@ -103,6 +103,10 @@ jobs:
       - *restore-cache-npm-deps
       - *run-install
       - run: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/demo-app/*
   demo-app:tests:
     <<: *job-defaults
     steps:
@@ -113,9 +117,8 @@ jobs:
 #      - store_test_results:
 #          path: dist/api/coverage/
 
-  docker:
+  docker-deploy:
     <<: *job-defaults
-    environment:
     steps:
       - setup_remote_docker
       - checkout
@@ -133,6 +136,15 @@ jobs:
             docker push $DOCKER_IMAGE_NAME
             docker push $DOCKER_IMAGE_NAME_AND_TAG
             echo "Successfully built and pushed Docker image '$DOCKER_IMAGE_NAME_AND_TAG'"
+
+  fe-deploy:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - *restore-cache-npm-deps
+      - *attach-workspace
+      - *run-install
+      - run: yarn deploy --json
 
 #
 # Workflow setup
@@ -158,8 +170,14 @@ workflows:
           requires: [ modules:build ]
       - demo-app:tests:
           requires: [ modules:build ]
-      - docker:
-          requires: [ api:build, modules:build ]
+      - docker-deploy:
+          requires: [ modules:build, api:build ]
+          filters:
+            branches:
+              only: master
+          context: org-default # so we have shared env variables
+      - fe-deploy:
+          requires: [ modules:build, demo-app:build ]
           filters:
             branches:
               only: master

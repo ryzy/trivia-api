@@ -23,7 +23,8 @@
     "test:ci": "ng test --project demo-app",
     "modules:build": "ng build --project ngx-trivia-api",
     "modules:test": "ng test --watch --project ngx-trivia-api",
-    "modules:test:ci": "ng test --project ngx-trivia-api"
+    "modules:test:ci": "ng test --project ngx-trivia-api",
+    "deploy": "firebase deploy --only hosting --token \"$FIREBASE_TOKEN\" --project trivia-demo-app"
   },
   "dependencies": {
     "@angular/animations": "7.2.1",
@@ -60,6 +61,7 @@
     "@types/node": "10.12.18",
     "@types/supertest": "2.0.7",
     "codelyzer": "4.5.0",
+    "firebase-tools": "6.3.0",
     "jest": "23.6.0",
     "jest-preset-angular": "6.0.2",
     "ng-packagr": "4.6.0",
