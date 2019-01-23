@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Explanation } from '../../../ngx-trivia-api/src/lib/model/explanation';
+import { Image } from '../../../ngx-trivia-api/src/lib/model/image';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +8,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public queries: string[] = ['pretty', 'jaguar', 'beauty', 'fashion', 'food', 'forest'];
+  public queries: string[] = [
+    'porsche',
+    'mustang',
+    'carrera',
+    'pretty',
+    'jaguar',
+    'beauty',
+    'fashion',
+    'food',
+    'forest',
+  ];
 
-  public currentQuery: string;
-
-  public constructor() {
-    this.currentQuery = this.queries[0];
-  }
+  public newQuery: string = this.queries[0];
 
   public onNewQuery(query: string): void {
-    this.currentQuery = query;
+    this.newQuery = query;
+  }
+
+  public imageSelected(image: Image): void {
+    console.log('AppComponent#imageSelected', image);
+  }
+  public explanationSelected(explanation: Explanation): void {
+    console.log('AppComponent#explanationSelected', explanation);
   }
 }

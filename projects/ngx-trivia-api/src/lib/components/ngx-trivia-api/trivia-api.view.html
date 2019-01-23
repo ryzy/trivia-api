@@ -1,6 +1,32 @@
-
 <mat-form-field appearance="outline">
   <mat-label>Query</mat-label>
-  <input matInput placeholder="Query" [value]="query">
-  <mat-hint>Search for images of definition...</mat-hint>
+  <input matInput [formControl]="queryInput" placeholder="Query" [value]="query">
+  <mat-hint>Search for images of explanations...</mat-hint>
 </mat-form-field>
+
+<mat-radio-group [value]="activeSection" (change)="dispatchSetActiveSection($event.value)">
+  <mat-radio-button [value]="ActiveSection.ImageUnsplash">{{ActiveSection.ImageUnsplash}}</mat-radio-button>
+  <mat-radio-button [value]="ActiveSection.ImageGoogle">{{ActiveSection.ImageGoogle}}</mat-radio-button>
+  <mat-radio-button [value]="ActiveSection.Explanation">{{ActiveSection.Explanation}}</mat-radio-button>
+</mat-radio-group>
+
+<h3 class="h-active-section">{{ activeSection }}:</h3>
+
+<div [ngSwitch]="activeSection">
+
+  <ng-container *ngSwitchCase="ActiveSection.Explanation">
+    <ngx-trivia-explanation
+      *ngFor="let expl of explanations$ | async"
+      [explanation]="expl"
+      (select)="selectExplanation($event)"
+    ></ngx-trivia-explanation>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <ngx-trivia-image
+      *ngFor="let image of images$ | async"
+      [image]="image"
+      (select)="selectImage($event)"
+    ></ngx-trivia-image>
+  </ng-container>
+</div>

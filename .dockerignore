@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+projects/
+test/
+
+# Also exclude some dist/ build files, which SHOULD NOT end up in the container
+# E.g. stats.json exposes too much sensitive info (libs, versions etc)
+dist/coverage

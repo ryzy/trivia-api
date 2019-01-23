@@ -80,6 +80,10 @@ jobs:
       - *restore-cache-npm-deps
       - *run-install
       - run: yarn modules:build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/ngx-trivia-api/*
       - store_test_results:
           path: dist/api/coverage/
   modules:tests:
@@ -109,34 +113,26 @@ jobs:
 #      - store_test_results:
 #          path: dist/api/coverage/
 
-#  deploy:
-#    <<: *job-defaults
-#    steps:
-#      - checkout
-#      - *restore-cache-npm-deps
-#      - *attach-workspace
-#      - *run-install
-#      - run:
-#          name: Deploy STAGE
-#          command: |
-#            yarn deploy
-#            # Send deploy message to #frontend-events-dev Slack channel
-#            curl -X POST --data-urlencode "payload={\"channel\": \"#frontend-events-dev\", \"username\": \"CI Deployments\", \"text\": \"*STAGE https://stage.what-conference-next.com/ deployed with success* :green_heart:\", \"icon_emoji\": \":rocket:\"}" https://hooks.slack.com/services/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
-#
-#  deploy-prod:
-#    <<: *job-defaults
-#    steps:
-#      - checkout
-#      - *restore-cache-npm-deps
-#      - *attach-workspace
-#      - *run-install
-#      - run:
-#          name: Deploy PROD
-#          command: |
-#            yarn deploy:prod
-#            # Send deploy message to #frontend-events-dev Slack channel
-#            curl -X POST --data-urlencode "payload={\"channel\": \"#frontend-events-dev\", \"username\": \"CI Deployments\", \"text\": \"*LIVE https://what-conference-next.com deployed with success* :green_heart:\", \"icon_emoji\": \":bomb:\"}" https://hooks.slack.com/services/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
+  docker:
+    <<: *job-defaults
+    environment:
+    steps:
+      - setup_remote_docker
+      - checkout
+      - *attach-workspace
+      - run:
+          name: Build Docker
+          command: |
+            export DOCKER_IMAGE_NAME=ryzy/trivia-api
+            export DOCKER_IMAGE_NAME_AND_TAG=${DOCKER_IMAGE_NAME}:v${CIRCLE_BUILD_NUM}
 
+            echo $DOCKER_PASSW | docker login -u $DOCKER_USER --password-stdin
+            docker-compose build
+
+            docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME_AND_TAG
+            docker push $DOCKER_IMAGE_NAME
+            docker push $DOCKER_IMAGE_NAME_AND_TAG
+            echo "Successfully built and pushed Docker image '$DOCKER_IMAGE_NAME_AND_TAG'"
 
 #
 # Workflow setup
@@ -162,15 +158,9 @@ workflows:
           requires: [ modules:build ]
       - demo-app:tests:
           requires: [ modules:build ]
-
-#      - deploy:
-#          requires: [ audit-checks, e2e-tests ]
-#          filters:
-#            branches:
-#              only: master
-#
-#      - deploy-prod:
-#          requires: [ audit-checks ]
-#          filters:
-#            branches:
-#              only: prod
+      - docker:
+          requires: [ api:build, modules:build ]
+          filters:
+            branches:
+              only: master
+          context: org-default # so we have shared env variables

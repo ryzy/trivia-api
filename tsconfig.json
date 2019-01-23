@@ -19,6 +19,14 @@
       "es2015",
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-trivia-api": [
+        "projects/ngx-trivia-api"
+      ],
+      "ngx-trivia-api/*": [
+        "projects/ngx-trivia-api/*"
+      ]
+    }
   }
 }

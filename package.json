@@ -5,8 +5,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "postinstall": "yarn modules:build && cd dist/ngx-trivia-api && (yarn unlink || true) && yarn link && cd ../../ && yarn link ngx-trivia-api",
     "all": "source scripts/yarn-all.sh",
+    "now-build": "yarn api:build",
     "api:build": "tsc -p projects/trivia-api/tsconfig.json",
     "api:start": "ts-node --project projects/trivia-api/tsconfig.json -r tsconfig-paths/register projects/trivia-api/src/main.ts",
     "api:start:dev": "nodemon --config projects/trivia-api/nodemon.json",
@@ -38,8 +38,11 @@
     "@angular/router": "7.2.1",
     "@nestjs/common": "5.6.2",
     "@nestjs/core": "5.6.2",
+    "@ngxs/devtools-plugin": "3.3.4",
+    "@ngxs/logger-plugin": "3.3.4",
+    "@ngxs/store": "3.3.4",
     "core-js": "2.6.2",
-    "ngx-trivia-api": "latest",
+    "ngx-trivia-api": "0.0.3",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.3.3",
     "zone.js": "0.8.28"

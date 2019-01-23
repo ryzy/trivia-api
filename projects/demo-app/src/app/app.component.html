@@ -15,6 +15,10 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <ngx-trivia-api [query]="currentQuery"></ngx-trivia-api>
+    <ngx-trivia-api
+      [newQuery]="newQuery"
+      (imageSelected)="imageSelected($event)"
+      (explanationSelected)="explanationSelected($event)"
+    ></ngx-trivia-api>
   </mat-card-content>
 </mat-card>

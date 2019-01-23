@@ -22,3 +22,5 @@ yarn modules:test:ci
 # Demo app
 yarn build
 yarn test:ci
+
+docker-compose build

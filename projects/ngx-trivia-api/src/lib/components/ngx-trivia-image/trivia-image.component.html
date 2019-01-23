@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-title>{{image.caption || image.id}}</mat-card-title>
+  <mat-card-content (click)="clicked()">
+    <img [src]="image.links.regular">
+  </mat-card-content>
+  <mat-card-footer>
+    <a href="{{image.links.html}}" target="_blank">View</a>
+  </mat-card-footer>
+</mat-card>

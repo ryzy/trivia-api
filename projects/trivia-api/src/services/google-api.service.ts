@@ -123,7 +123,7 @@ export class GoogleApiService {
 
     const queryParams: GoogleExplainQueryParams = {
       key: environment.googleApiKey,
-      limit: 3,
+      limit: 5,
       ...(params as GoogleExplainQueryParams),
     };
 

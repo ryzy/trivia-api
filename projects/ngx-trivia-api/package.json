@@ -1,7 +1,8 @@
 {
   "name": "ngx-trivia-api",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "UNLICENSED",
+  "main": "src/public_api.ts",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  trivia-api:
+    container_name: trivia-api
+    image: ${DOCKER_IMAGE_NAME:-ryzy/trivia-api}
+    build:
+      context: .
+      dockerfile: scripts/docker/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - UNSPLASH_ACCESS_KEY=${UNSPLASH_ACCESS_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    ports:
+      - '4202:80'
