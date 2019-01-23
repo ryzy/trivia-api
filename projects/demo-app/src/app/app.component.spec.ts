@@ -1,5 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
+
 import { AppComponent } from './app.component';
 import { CoreModule } from './core.module';
 import { SharedModule } from './shared.module';
@@ -7,7 +9,7 @@ import { SharedModule } from './shared.module';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, CoreModule, SharedModule],
+      imports: [NoopAnimationsModule, NgxsModule.forRoot(), CoreModule, SharedModule],
       declarations: [AppComponent],
     }).compileComponents();
   }));
